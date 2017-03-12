@@ -89,7 +89,7 @@ struct thread
     uint8_t *stack;                     /* Saved stack pointer. */
     int priority;                       /* Priority. */
     struct list_elem allelem;           /* List element for all threads list. */
-
+    int64_t wake_ticks;                     // The wakeup ticks used by timer sleep() */ 
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
 
@@ -138,4 +138,7 @@ void thread_set_nice (int);
 int thread_get_recent_cpu (void);
 int thread_get_load_avg (void);
 
+/***********************/
+bool thread_priority_cmpIsLarger(struct list_elem *, struct list_elem *);
+bool thread_cmp_wakeTick(struct list_elem *firstElem, struct list_elem *secondElem, void *aux); 
 #endif /* threads/thread.h */

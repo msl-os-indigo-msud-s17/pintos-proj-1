@@ -585,3 +585,16 @@ allocate_tid (void)
 /* Offset of `stack' member within `struct thread'.
    Used by switch.S, which can't figure it out on its own. */
 uint32_t thread_stack_ofs = offsetof (struct thread, stack);
+
+//TODO ADD TO DOC
+/* This method compares the number of wake ticks of two threads.
+ * If the second param thread has more remaining wake_ticks return
+ * true, else return false.
+ */
+bool thread_cmp_wakeTick(struct list_elem *firstElem,
+                         struct list_elem *secondElem,
+                         void *aux UNUSED){
+    struct thread *cmpThreadA = list_entry(firstElem, struct thread, elem);
+    struct thread *cmpThreadB = list_entry(secondElem, struct thread, elem);
+    return cmpThreadB -> wake_ticks > cmpThreadA-> wake_ticks;
+}
